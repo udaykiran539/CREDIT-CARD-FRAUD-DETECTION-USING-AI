@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CreditGuard – AI Fraud Protection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0a0c14;
+            --surface: #10141f;
+            --surface2: #151a2b;
+            --text: #e2e8f0;
+            --text-dim: #a5b4fc;
+            --primary: #00f9a8;
+            --accent: #0ea5e9;
+            --glow-emerald: rgba(0, 249, 168, 0.22);
+            --glow-cyan: rgba(14, 165, 233, 0.18);
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background:url('https://media.istockphoto.com/id/1171004715/photo/hacker-using-laptops-and-stealing-credit-card-information.jpg?s=612x612&w=0&k=20&c=G3q-6JBeONHYjhNrTd_q_GtkX-e_z_c8MW2fL3dj3OY=') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+        }
+
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(16,20,31,0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,249,168,0.1);
+            padding: 1.1rem 0;
+        }
+
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-left: 2.3rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        .hero {
+            padding: 16rem 0 12rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.2rem, 10vw, 6rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.8rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent), #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 3.5rem;
+            color: var(--text-dim);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #0a0c14;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 12px 50px var(--glow-emerald);
+            transition: all 0.4s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 80px var(--glow-emerald);
+            background: #00e695;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 1.15rem 2.8rem;
+            border-radius: 50px;
+            margin-left: 1.5rem;
+            transition: all 0.35s;
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: #0a0c14;
+            box-shadow: 0 0 40px var(--glow-cyan);
+        }
+
+        footer {
+            padding: 5rem 0 3rem;
+            text-align: center;
+            color: #64748b;
+            border-top: 1px solid rgba(0,249,168,0.08);
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 12rem 0 8rem; }
+            .nav-links a { margin-left: 1.2rem; font-size: 0.95rem; }
+            .btn-primary, .btn-outline { display: block; margin: 1rem auto; width: fit-content; }
+            .btn-outline { margin-left: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <nav>
+            <a href="/" class="logo">CreditGuard</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/register">Register</a>
+                <a href="/login">Login</a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <h1>Credit Card<br>Fraud Detection</h1>
+        <p class="subtitle">Next-generation AI-powered protection against financial fraud</p>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 CreditGuard. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>

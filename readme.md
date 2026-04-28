@@ -1,0 +1,1 @@
+use Python 3.10.15 version and install reqiured lib from req.txt

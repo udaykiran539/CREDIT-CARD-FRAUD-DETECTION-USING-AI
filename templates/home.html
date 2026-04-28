@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Home – CreditGuard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0a0c14;
+            --surface: #10141f;
+            --surface2: #151a2b;
+            --text: #e2e8f0;
+            --text-dim: #a5b4fc;
+            --primary: #00f9a8;
+            --accent: #0ea5e9;
+            --glow-emerald: rgba(0, 249, 168, 0.24);
+            --glow-cyan: rgba(14, 165, 233, 0.20);
+            --danger: #ff4d6d;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg) url('https://media.istockphoto.com/id/2247684368/photo/woman-hacking-computer-in-dark-blue-light.jpg?s=612x612&w=0&k=20&c=_Z3eu3ZssPul6gCjAdv-PVAf_2e4yR3RtvoRM_508-o=') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+        }
+
+        header {
+            background: rgba(16,20,31,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,249,168,0.12);
+            padding: 1.1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+        nav { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-left: 2.2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .welcome {
+            padding: 14rem 0 8rem;
+            text-align: center;
+        }
+
+        .welcome h1 {
+            font-size: clamp(3rem, 9vw, 5.2rem);
+            margin-bottom: 1.4rem;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .welcome p {
+            font-size: 1.35rem;
+            color: var(--text-dim);
+            max-width: 780px;
+            margin: 0 auto 4.5rem;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 2.4rem;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background: rgba(16,20,31,0.78);
+            border-radius: 18px;
+            padding: 3rem 2.4rem;
+            border: 1px solid rgba(0,249,168,0.14);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .card:hover {
+            transform: translateY(-14px);
+            border-color: var(--accent);
+            box-shadow: 0 28px 64px var(--glow-emerald);
+        }
+
+        .card h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 1.6rem 0 1.2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: #0a0c14;
+            padding: 1.1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 1.6rem;
+            transition: all 0.35s;
+            box-shadow: 0 10px 40px var(--glow-emerald);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 70px var(--glow-emerald);
+            background: #00e695;
+        }
+
+        @media (max-width: 768px) {
+            .welcome { padding: 12rem 0 6rem; }
+            .welcome h1 { font-size: 3.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <nav>
+            <a href="/home" class="logo">CreditGuard</a>
+            <div class="nav-links">
+                <a href="/upload">Upload Dataset</a>
+                <a href="/model">Model Performance</a>
+                <a href="/prediction">Prediction</a>
+                <a href="/">Logout</a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<section class="welcome">
+    <div class="container">
+        <h1>Welcome, {{ session.user_name|default('User') }}!</h1>
+        <p>Protect transactions in real time — upload datasets, compare models, or analyze single transactions instantly.</p>
+    </div>
+</section>
+
+</body>
+</html>

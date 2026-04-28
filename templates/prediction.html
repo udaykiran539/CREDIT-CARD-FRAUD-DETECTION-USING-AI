@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Single Prediction – CreditGuard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0a0c14;
+            --surface: #10141f;
+            --surface2: #151a2b;
+            --text: #e2e8f0;
+            --text-dim: #a5b4fc;
+            --primary: #00f9a8;
+            --accent: #0ea5e9;
+            --danger: #ff4d6d;
+            --glow-emerald: rgba(0,249,168,0.26);
+            --glow-cyan: rgba(14,165,233,0.22);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg) url('https://media.istockphoto.com/id/2151153591/photo/cropped-hands-image-in-criminal-anonymous-male-approaching-credit-card-surmise.jpg?s=612x612&w=0&k=20&c=xF_w7GB9gg4_UkmIkRLv5Rop_KYwUYMMQrlGO8s7ZGE=') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10,12,20,0.90), rgba(10,12,20,0.92));
+            z-index: -1;
+        }
+
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(16,20,31,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,249,168,0.12);
+            padding: 1.1rem 0;
+            z-index: 100;
+        }
+
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+        nav { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-left: 2.2rem;
+            font-weight: 500;
+            transition: color 0.25s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .section { padding: 10rem 0 6rem; }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-dim);
+            margin-bottom: 3.2rem;
+            font-size: 1.1rem;
+        }
+
+        form { max-width: 920px; margin: 0 auto; }
+
+        .model-select-wrapper {
+            grid-column: 1 / -1;
+            background: rgba(21,26,43,0.5);
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(14,165,233,0.25);
+        }
+
+        .model-select-wrapper label {
+            display: inline-block;
+            margin-right: 1rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        select {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--accent);
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            width: 320px;
+            max-width: 100%;
+            cursor: pointer;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            background: rgba(21, 26, 43, 0.4);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--surface2);
+            border: 1px solid rgba(14,165,233,0.2);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 249, 168, 0.15);
+            background: var(--surface);
+        }
+
+        .btn-predict {
+            background: var(--primary);
+            color: #0a0c14;
+            border: none;
+            padding: 1.3rem 4rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 3rem auto 2rem;
+            display: block;
+            box-shadow: 0 10px 30px var(--glow-emerald);
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-width: 280px;
+        }
+
+        .btn-predict:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading {
+            display: none;
+            color: var(--primary);
+            font-weight: 600;
+            text-align: center;
+            margin: 1.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .result-box {
+            background: rgba(16,20,31,0.9);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            border: 2px solid rgba(0,249,168,0.3);
+            backdrop-filter: blur(12px);
+            max-width: 920px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fraud { color: var(--danger); font-size: 3rem; font-weight: 900; text-shadow: 0 0 20px rgba(255, 77, 109, 0.3); }
+        .not-fraud { color: var(--primary); font-size: 3rem; font-weight: 900; text-shadow: 0 0 20px rgba(0, 249, 168, 0.3); }
+
+        .result-model {
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-dim);
+        }
+
+        .error-msg { color: var(--danger); font-size: 1.2rem; padding: 1rem; }
+
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .btn-predict { width: 100%; min-width: unset; }
+            .model-select-wrapper { padding: 1rem; }
+            select { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <nav>
+            <a href="/home" class="logo">CreditGuard</a>
+            <div class="nav-links">
+                <a href="/upload">Upload Dataset</a>
+                <a href="/model">Model Performance</a>
+                <a href="/prediction">Prediction</a>
+                <a href="/">Logout</a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<section class="section">
+    <div class="container">
+        <h1>Fraud Detection</h1>
+        <p class="subtitle">Single Transaction Neural Analysis</p>
+
+        <form method="POST" id="predict-form">
+            <!-- CSRF protection (recommended) -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() if csrf_token else '' }}">
+
+            <div class="form-grid">
+                <div class="form-group"><label>V3</label><input type="number" step="any" name="v3" placeholder="0.00" required></div>
+                <div class="form-group"><label>V4</label><input type="number" step="any" name="v4" placeholder="0.00" required></div>
+                <div class="form-group"><label>V6</label><input type="number" step="any" name="v6" placeholder="0.00" required></div>
+                <div class="form-group"><label>V7</label><input type="number" step="any" name="v7" placeholder="0.00" required></div>
+                <div class="form-group"><label>V9</label><input type="number" step="any" name="v9" placeholder="0.00" required></div>
+                <div class="form-group"><label>V10</label><input type="number" step="any" name="v10" placeholder="0.00" required></div>
+                <div class="form-group"><label>V11</label><input type="number" step="any" name="v11" placeholder="0.00" required></div>
+                <div class="form-group"><label>V12</label><input type="number" step="any" name="v12" placeholder="0.00" required></div>
+                <div class="form-group"><label>V14</label><input type="number" step="any" name="v14" placeholder="0.00" required></div>
+                <div class="form-group"><label>V16</label><input type="number" step="any" name="v16" placeholder="0.00" required></div>
+                <div class="form-group"><label>V17</label><input type="number" step="any" name="v17" placeholder="0.00" required></div>
+                <div class="form-group"><label>Amount</label><input type="number" step="any" name="amount" placeholder="0.00" required></div>
+            </div>
+
+            <button type="submit" class="btn-predict" id="predict-btn">Analyze Transaction</button>
+            <div class="loading" id="loading">Analyzing transaction...</div>
+        </form>
+
+        {% if prediction_value %}
+        <div class="result-box">
+            {% if prediction_value == 'fraud' %}
+            <div class="fraud">⚠️ FRAUD DETECTED</div>
+            <p style="color:var(--text-dim); margin-top:1rem;">High-risk behavioral and statistical patterns identified.</p>
+            {% else %}
+            <div class="not-fraud">✅ LEGITIMATE TRANSACTION</div>
+            <p style="color:var(--text-dim); margin-top:1rem;">Transaction aligns with normal user behavior profiles.</p>
+            {% endif %}
+
+            {% if selected_model %}
+            <div class="result-model">
+                Detected using: <strong>{{ selected_model }}</strong>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="result-box" style="border-color:var(--danger);">
+            <div class="error-msg"><strong>SYSTEM ERROR:</strong> {{ error }}</div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<script>
+    document.getElementById('predict-form').addEventListener('submit', function(e) {
+        const btn = document.getElementById('predict-btn');
+        const loading = document.getElementById('loading');
+        
+        // Disable button and show loading
+        btn.disabled = true;
+        btn.textContent = 'Analyzing...';
+        loading.style.display = 'block';
+        
+        // Note: We don't preventDefault() here so form submits normally
+    });
+</script>
+
+</body>
+</html>
